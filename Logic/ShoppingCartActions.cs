@@ -29,7 +29,7 @@ namespace IndividualLabAssignment.Logic
                     Quantity = 1,
                     DateRented = DateTime.Now
                 };
-                db.ShoppingCartItems.Add(cartItem);
+                db.ShoppingCartItems.Add(cartItem);//add to cart
             }
             else
             {
