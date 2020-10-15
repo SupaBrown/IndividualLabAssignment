@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="IndividualLabAssignment.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="IndividualLabAssignment.SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -64,9 +64,10 @@
 
                         </li>
                         <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/Product">Product</a></li>
+                        <li><a runat="server" href="~/ProductList">Products</a></li>
                         <li><a runat="server" href="~/About">About</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
+                        <li><a runat="server" href="~/ShoppingCart" ID="cartCount"> &nbsp; </a> </li>
                         
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
@@ -94,6 +95,23 @@
              <h1 style="color:blue;text-align:center;" >B's Car Rental</h1>
                              
         </div>
+        <div id="CategoryMenu" style="text-align: center">
+          <asp:ListView ID="categoryList"
+         ItemType="IndividualLabAssignment.Models.Category"
+         runat="server"
+         SelectMethod="GetCategories" >
+         <ItemTemplate>
+             <b style="font-size: large; font-style: normal">
+         <a href="/ProductList.aspx?id=<%#: Item.CategoryID %>"> <%#: Item.CategoryName %>
+        </a>
+                 </b>
+             
+         </ItemTemplate>
+         <ItemSeparatorTemplate> | </ItemSeparatorTemplate>
+         </asp:ListView>
+            <hr />
+        </div>
+        
 
 
         <div class="container body-content">

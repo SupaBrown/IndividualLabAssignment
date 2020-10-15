@@ -7,6 +7,10 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using System.Linq;
+using IndividualLabAssignment;
+using IndividualLabAssignment.Models;
+using IndividualLabAssignment.Logic;
 
 namespace IndividualLabAssignment
 {
@@ -20,8 +24,8 @@ namespace IndividualLabAssignment
         {
             // The code below helps to protect against XSRF attacks
             var requestCookie = Request.Cookies[AntiXsrfTokenKey];
-            Guid requestCookieGuidValue;
-            if (requestCookie != null && Guid.TryParse(requestCookie.Value, out requestCookieGuidValue))
+            Guid RequestCookieGuidValue;
+            if (requestCookie != null && Guid.TryParse(requestCookie.Value, out RequestCookieGuidValue))
             {
                 // Use the Anti-XSRF token from the cookie
                 _antiXsrfTokenValue = requestCookie.Value;
@@ -45,10 +49,10 @@ namespace IndividualLabAssignment
                 Response.Cookies.Set(responseCookie);
             }
 
-            Page.PreLoad += master_Page_PreLoad;
+            Page.PreLoad += Master_Page_PreLoad;
         }
 
-        protected void master_Page_PreLoad(object sender, EventArgs e)
+        protected void Master_Page_PreLoad(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
@@ -70,6 +74,23 @@ namespace IndividualLabAssignment
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            using (ShoppingCartActions usersShoppingCart = new
+            ShoppingCartActions())
+            {
+                string cartStr = string.Format("Cart ({0})",
+                usersShoppingCart.GetCount());
+                cartCount.InnerText = cartStr;
+            }
+
+        }
+        public IQueryable<Category> GetCategories()
+        {
+            var db = new IndividualLabAssignment.Models.ProductContext();
+            IQueryable<Category> query = db.Categories;
+            return query; 
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
