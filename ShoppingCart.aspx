@@ -11,14 +11,14 @@
         <asp:BoundField DataField="ProductID" HeaderText="CAR-ID" SortExpression="ProductID"/>
         <asp:BoundField DataField="Product.ProductName" HeaderText="CAR-NAME"/>
         <asp:BoundField DataField="Product.UnitPrice" HeaderText="Price-(each)" DataFormatString="{0:c}"/>
-        <asp:TemplateField HeaderText="Number OF DAYS">
+        <asp:TemplateField HeaderText="NumberDays">
             <ItemTemplate>
-                <asp:TextBox ID="numberDays" Width="40" runat="server" Text="<%#: Item.Quantity %>" > </asp:TextBox>
+                <asp:TextBox ID="numberDays" Width="40" runat="server" Text="<%#: Item.NumberDays %>" > </asp:TextBox>
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Rental Total">
             <ItemTemplate>
-                <%#:String.Format("{0:c}", (( Convert.ToDouble(Item.Quantity)) *
+                <%#:String.Format("{0:c}", (( Convert.ToDouble(Item.NumberDays)) *
                     Convert.ToDouble(Item.Product.UnitPrice)))%>
             </ItemTemplate>
         </asp:TemplateField>

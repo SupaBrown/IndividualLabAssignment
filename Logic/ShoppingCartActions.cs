@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using IndividualLabAssignment.Models;
+using WebGrease.Css.Extensions;
 
 namespace IndividualLabAssignment.Logic
 {
@@ -20,20 +21,23 @@ namespace IndividualLabAssignment.Logic
                 && c.ProductId == id);
             if (cartItem == null)
             {
-                cartItem = new CartItem()
+                cartItem = new CartItem
                 {
                     ItemId = Guid.NewGuid().ToString(),
                     ProductId = id,
                     CartId = ShoppingCartId,
-                    Product = db.Products.SingleOrDefault(r => r.ProductID == id),
-                    Quantity = 1,
-                    DateRented = DateTime.Now
+                    Product = db.Products.SingleOrDefault(p => p.ProductID == id),
+                    NumberDays = 1,
+                    DateRented = DateTime.Now,
+                    
+
+                    DueToReturn = DateTime.Now.AddDays(1)
                 };
                 db.ShoppingCartItems.Add(cartItem);//add to cart
             }
             else
             {
-
+               
             }
             db.SaveChanges();
         }
@@ -91,7 +95,7 @@ namespace IndividualLabAssignment.Logic
             decimal? total = decimal.Zero;
             total = (decimal?)(from cartItems in db.ShoppingCartItems
                                where cartItems.CartId == ShoppingCartId
-                               select (int)cartItems.Quantity *
+                               select (int)cartItems.NumberDays *
                                cartItems.Product.UnitPrice).Sum();
             return total ?? decimal.Zero;
         }
@@ -178,7 +182,8 @@ namespace IndividualLabAssignment.Logic
                                   select c).FirstOrDefault();
                     if (myItem != null)
                     {
-                        myItem.Quantity = quantity;
+                        myItem.NumberDays = quantity;
+                        myItem.DueToReturn = DateTime.Now.AddDays(quantity);
                         db.SaveChanges();
                     }
                 }
@@ -207,7 +212,7 @@ namespace IndividualLabAssignment.Logic
             // Get the count of each item in the cart and sum them up
             int? count = (from cartItems in db.ShoppingCartItems
                           where cartItems.CartId == ShoppingCartId
-                          select (int?)cartItems.Quantity).Sum();
+                          select (int?)cartItems.NumberDays).Sum();
             // Return 0 if all entries are null
             return count ?? 0;
         }
