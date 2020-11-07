@@ -8,6 +8,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Data.Entity;
 using IndividualLabAssignment.Models;
+using IndividualLabAssignment.Logic;
 
 namespace IndividualLabAssignment
 {
@@ -20,7 +21,10 @@ namespace IndividualLabAssignment
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             //Initialise the product database
-            Database.SetInitializer(new ProductDatabaseInitializer());
+            //Database.SetInitializer(new ProductDatabaseInitializer());
+            // Create the administrator role and user.
+            RoleActions roleActions = new RoleActions();
+            roleActions.createAdmin();
         }
     }
 }

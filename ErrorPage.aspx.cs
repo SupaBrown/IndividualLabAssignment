@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Diagnostics;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using IndividualLabAssignment.Logic;
+using Xunit;
 
 namespace IndividualLabAssignment
 {
@@ -14,7 +15,7 @@ namespace IndividualLabAssignment
         protected void Page_Load(object sender, EventArgs e)
         {
             // Create safe error messages.
-            string generalErrorMsg = "A problem has occurred on this web site. Please try again. " +
+            string generalErrorMsg = "Problem! Reload your page!. " +
             "If this error continues, please contact support.";
             string httpErrorMsg = "An HTTP error occurred. Page Not found. Please try again.";
             string unhandledErrorMsg = "The error was unhandled by application code.";
@@ -65,7 +66,7 @@ namespace IndividualLabAssignment
                 }
             }
             // Log the exception.
-            //ExceptionUtility.LogException(ex, errorHandler);
+            ExceptionUtility.ReferenceEquals(ex, errorHandler);
             // Clear the error from the server.
             Server.ClearError();
         }

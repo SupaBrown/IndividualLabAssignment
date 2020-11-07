@@ -29,8 +29,6 @@ namespace IndividualLabAssignment.Logic
                     Product = db.Products.SingleOrDefault(p => p.ProductID == id),
                     NumberDays = 1,
                     DateRented = DateTime.Now,
-                    
-
                     DueToReturn = DateTime.Now.AddDays(1)
                 };
                 db.ShoppingCartItems.Add(cartItem);//add to cart
@@ -65,6 +63,9 @@ namespace IndividualLabAssignment.Logic
             }
             return HttpContext.Current.Session[CartSessionKey].ToString();
         }
+
+        
+
         public List<CartItem> GetCartItems()
         {
             ShoppingCartId = GetCartId();
@@ -72,7 +73,7 @@ namespace IndividualLabAssignment.Logic
         }
 
 
-        /*public string GetProductID()
+        public string GetProductID()
         {
             if (HttpContext.Current.Session[CartSessionKey] == null)
             {
@@ -88,7 +89,7 @@ namespace IndividualLabAssignment.Logic
 
             }
             return HttpContext.Current.Session[CartSessionKey].ToString();
-        }*/
+        }
         public decimal GetTotal()
         {
             ShoppingCartId = GetCartId();
@@ -221,6 +222,16 @@ namespace IndividualLabAssignment.Logic
             public int ProductId;
             public int numberDays;
             public bool RemoveItem;
+        }
+        public void MigrateCart(string cartId, string userName)
+        {
+            var shoppingCart = db.ShoppingCartItems.Where(c => c.CartId == cartId);
+            foreach(CartItem item in shoppingCart)
+            {
+                item.CartId = userName;
+            }
+            HttpContext.Current.Session[CartSessionKey] = userName;
+            db.SaveChanges();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Data.Entity;
 namespace IndividualLabAssignment.Models
 {
     public class ProductDatabaseInitializer :
-    DropCreateDatabaseAlways<ProductContext>
+    DropCreateDatabaseIfModelChanges<ProductContext>
     {
         protected override void Seed(ProductContext context)
         {
