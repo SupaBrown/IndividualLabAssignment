@@ -54,7 +54,7 @@ namespace IndividualLabAssignment.Admin
             {
                 try
                 {
-                    // C: \Users\User1\source\repos\Milestone2\Milestone2\Images\
+                    
                     // Save to Images folder.
                     ProductImage.PostedFile.SaveAs(path + "/" + ProductImage.FileName);
                     // Save to Images/Thumbs folder.
@@ -171,7 +171,7 @@ namespace IndividualLabAssignment.Admin
             {
                 try
                 {
-                    // C: \Users\User1\source\repos\Milestone2\Milestone2\Images\
+                    
                     // Save to Images folder.
                     UpdateProductImage.PostedFile.SaveAs(path + "/" + UpdateProductImage.FileName);
                     // Save to Images/Thumbs folder.

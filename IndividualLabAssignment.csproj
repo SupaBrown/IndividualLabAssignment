@@ -238,6 +238,7 @@
     <Content Include="Images\contactus.jpg" />
     <Content Include="Images\MyLogo.png" />
     <Content Include="Images\Tree.jpg" />
+    <Content Include="ProductAlreadyRented.aspx" />
     <Content Include="ProductList.aspx" />
     <Content Include="ProductDetails.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -478,6 +479,13 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductContext.cs" />
     <Compile Include="Models\ProductDatabaseInitializer.cs" />
+    <Compile Include="ProductAlreadyRented.aspx.cs">
+      <DependentUpon>ProductAlreadyRented.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductAlreadyRented.aspx.designer.cs">
+      <DependentUpon>ProductAlreadyRented.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProductList.aspx.cs">
       <DependentUpon>ProductList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

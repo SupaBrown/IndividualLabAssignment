@@ -21,7 +21,7 @@ namespace IndividualLabAssignment
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             //Initialise the product database
-            //Database.SetInitializer(new ProductDatabaseInitializer());
+            Database.SetInitializer(new ProductDatabaseInitializer());
             // Create the administrator role and user.
             RoleActions roleActions = new RoleActions();
             roleActions.createAdmin();

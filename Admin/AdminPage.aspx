@@ -53,7 +53,7 @@
       </tr>
       <tr>
          <td>
-            <asp:Label ID="LabelAddImageFile" runat="server">Image
+            <asp:Label ID="LabelAddImageFile" runat="server">Images
                File:
             </asp:Label>
          </td>

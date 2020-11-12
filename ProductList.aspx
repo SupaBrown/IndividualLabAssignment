@@ -38,7 +38,7 @@
                                 <td> 
                                     
 
-                                        <img src="Images/<%#:Item.ImagePath%>" 
+                                        <img src="/<%#:Item.ImagePath%>" 
                                             width="300" height="225" style="border:solid" /> 
                                         
 
